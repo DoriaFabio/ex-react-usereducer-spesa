@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { FaCartPlus } from "react-icons/fa";
 import { FaTrash } from 'react-icons/fa';
 
@@ -47,8 +47,10 @@ function App() {
     }
   }
 
-  const totalToPay = addedProducts.reduce((acc, p) => acc + (p.price * p.quantity), 0);
-
+  const totalToPay = useMemo(() => {
+    return addedProducts.reduce((acc, p) => acc + (p.price * p.quantity), 0)
+  }, [addedProducts]);
+  
   return (
     <>
       <h1 className='font-bold text-2xl m-3'>Carrello della spesa</h1>
